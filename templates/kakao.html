@@ -92,8 +92,8 @@
             <div class="header-review text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
                 style="max-width: 600px;">
                 <h6 class="text-primary">카카오 페이지</h6>
-                <h2 class="mb-4">한줄평 남기기</h1>
-                <button class="btn btn-primary rounded-pill py-3 px-5 mt-3">CLICK :)</button>
+                <h2 class="mb-4">한줄평 남기기</h2>
+                <button class="btn btn-primary rounded-pill py-3 px-5 mt-3" >CLICK :)</button>
                 <div class="mypost m-4" id="post-box">
                     <div class="form-floating mb-3">
                         <input id="url" type="email" class="form-control" placeholder="name@example.com">
@@ -115,12 +115,12 @@
                         <label for="floatingTextarea2">한줄평</label>
                     </div>
                     <div class="mybtns m-4">
-                        <button onclick="posting()" type="button" class="btn btn-primary">기록하기</button>
+                        <button type="button" id="record__btn" class="btn btn-primary">기록하기</button>
                         <button onclick="close_box()" type="button" class="btn btn-outline-primary">닫기</button>
                     </div>
                 </div>
             </div>
-            <div class="cont-review row g-4">
+            <div class="cont-review row g-4" id="poster">
                 <article class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item rounded overflow-hidden">
                         <!-- 웹툰 이미지 src에 넣기-->
@@ -158,6 +158,7 @@
 
     <!-- Template Javascript -->
     <script src="/static/js/main.js"></script>
+    <script src="/static/js/kakao.js"></script>
 </body>
 
 </html>
