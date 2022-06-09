@@ -19,6 +19,9 @@ db = client.dbtoonsoup
 def home():
     return render_template('index.html')
 
+@app.route('/naver_webtoon', methods=["GET"])
+def get_naver():
+    return render_template('naver.html')
 
 @app.route('/kakao_webtoon', methods=["GET"])
 def get_kakao():
@@ -60,6 +63,10 @@ def post_kakao():
 def kakao():
     webtoons = list(db.kakao.find({}, {'_id':False}))
     return jsonify({'webtoons':webtoons})
+
+@app.route('/ktoon_webtoon', methods=["GET"])
+def get_ktoon():
+    return render_template('ktoon.html')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=4000, debug=True)
