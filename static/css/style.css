@@ -25,16 +25,11 @@ h1, h2, h3, h4, h5, h6, .logo-toonsoup, .tit-review {
     transition: all 0.2s ease-in;
 }
 
-.logo-toonsoup.logo-eng {
-    position: relative;
-    left: 0;
-    width: 280px;
-    text-align: center;
-}
-
-.navbar-brand:hover > .logo-toonsoup.logo-eng {
-    position: relative;
-    transform: translateX(0);
+#card-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: 0 15%;
 }
 
 /********** Template CSS **********/
