@@ -353,12 +353,14 @@ h6,
 
 .portfolio-img {
   position: relative;
+  width: 100%;
 }
 
 .portfolio-img > img {
   width: 100%;
-  background-size: cover;
-  background-position: center;
+  height: 240px;
+  object-fit: cover;
+  object-position: 0 15%;
 }
 
 .portfolio-img::before,
