@@ -68,7 +68,7 @@
                         <a href="/ktoon_webtoon" class="dropdown-item">케이툰</a>
                     </div>
                 </div>
-                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i
                     class="fa fa-arrow-right ms-3"></i></a>
@@ -85,62 +85,16 @@
     </div>
     <!-- Page Header End -->
 
-
-    <!-- Recommendation Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h6 class="text-primary">케이툰</h6>
                 <h1 class="mb-4">오늘의 추천 웹툰</h1>
             </div>
-            <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.5s">
-                <div class="col-lg-4 col-md-6 portfolio-item first">
-                    <div class="portfolio-img rounded overflow-hidden">
-                        <img class="img-fluid" src="/static/img/img-600x400-6.jpg" alt="">
-                        <div class="portfolio-btn">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i
-                                    class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="rec-day text-primary mb-0">목요일 연재</p>
-                        <hr class="text-primary w-25 my-2">
-                        <h5 class="lh-base">웹툰 제목</h5>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item second">
-                    <div class="portfolio-img rounded overflow-hidden">
-                        <img class="img-fluid" src="/static/img/img-600x400-5.jpg" alt="">
-                        <div class="portfolio-btn">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i
-                                    class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="rec-day text-primary mb-0">목요일 연재</p>
-                        <hr class="text-primary w-25 my-2">
-                        <h5 class="lh-base">웹툰 제목</h5>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item third">
-                    <div class="portfolio-img rounded overflow-hidden">
-                        <img class="img-fluid" src="/static/img/img-600x400-4.jpg" alt="">
-                        <div class="portfolio-btn">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i
-                                    class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="rec-day text-primary mb-0">목요일 연재</p>
-                        <hr class="text-primary w-25 my-2">
-                        <h5 class="lh-base">웹툰 제목</h5>
-                    </div>
-                </div>
+            <div id="webtoon-box"class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.5s">
             </div>
         </div>
     </div>
-    <!-- Recommendation End -->
-
 
     <!-- Service Start -->
     <section class="sect-review container-xxl py-5">
@@ -149,8 +103,8 @@
                 style="max-width: 600px;">
                 <h6 class="text-primary">케이툰</h6>
                 <h2 class="mb-4">한줄평 남기기</h2>
-                <button class="btn btn-primary rounded-pill py-3 px-5 mt-3">CLICK :)</button>
-                <div class="mypost m-4" id="post-box">
+                <button onclick="open_box()" class="btn btn-primary rounded-pill py-3 px-5 mt-3">CLICK :)</button>
+                <div class="mypost m-4" id="post-box" style="display:none">
                     <div class="form-floating mb-3">
                         <input id="url" type="email" class="form-control" placeholder="name@example.com">
                         <label>웹툰URL</label>
@@ -171,25 +125,12 @@
                         <label for="floatingTextarea2">한줄평</label>
                     </div>
                     <div class="mybtns m-4">
-                        <button type="button" id="record__btn" class="btn btn-primary">기록하기</button>
+                        <button onclick="save_comment()" type="button" id="record__btn" class="btn btn-primary">기록하기</button>
                         <button onclick="close_box()" type="button" class="btn btn-outline-primary">닫기</button>
                     </div>
                 </div>
             </div>
             <div class="cont-review row g-4" id="poster">
-                <article class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item rounded overflow-hidden">
-                        <!-- 웹툰 이미지 src에 넣기-->
-                        <img id="card-image" class="img-fluid" src="/static/img/img-600x400-1.jpg" alt="">
-                        <div class="position-relative p-4">
-                            <h4 id="card-title" class="mt-2">웹툰 제목</h4>
-                            <p><span id="card-comment">한줄평</span> - <span id="card-author">작성자</span></p>
-                            <p id="card-star">⭐⭐⭐⭐⭐</p>
-                            <!-- 웹툰 URL href에 넣기 -->
-                            <a id="card-url" class="small fw-medium" href="웹툰URL">웹툰으로 이동<i class="fa fa-arrow-right ms-2"></i></a>
-                        </div>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
@@ -211,9 +152,10 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Template Javascript -->
     <script src="/static/js/main.js"></script>
+    <script src="/static/js/ktoon.js"></script>
 </body>
 
 </html>

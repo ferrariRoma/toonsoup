@@ -93,6 +93,67 @@ def kakao__recommend():
 
 # kakao handler end
 
+@app.route('/ktoon_comment/post', methods=['POST'])
+def comment_ktoon():
+    url_receive = request.form['url_give']
+    star_receive = request.form['star_give']
+    comment_receive = request.form['comment_give']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get(url_receive, headers=headers)
+
+    soup = BeautifulSoup(data.text, 'html.parser')
+
+    image = soup.select_one('meta[property="og:image"]')['content']
+    title = soup.select_one('meta[property="og:title"]')['content']
+
+    doc = {
+        'url': url_receive,
+        'image': image,
+        'title': title,
+        'star': star_receive,
+        'comment': comment_receive
+    }
+    db.ktoon_comments.insert_one(doc)
+
+    return jsonify({'msg': '등록 완료!'})
+
+@app.route('/ktoon/recommend', methods=["GET"])
+def post_ktoon():
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get('https://www.myktoon.com/web/webtoon/works_list.kt', headers=headers)
+    soup = BeautifulSoup(data.text, 'html.parser')
+
+
+    first_webtoon = {
+        'date' : soup.select_one('#container > section > div > article.col.selected > div > h4').text,
+        'title' : soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a > div.info > strong').text,
+        'image' : soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a > div.thumb > img')['src'],
+        'url' : soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a')['href']
+    }
+    second_webtoon = {
+        'date': soup.select_one('#container > section > div > article.col.selected > div > h4').text,
+        'title': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(2) > a > div.info > strong').text,
+        'image': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(2) > a > div.thumb > img')['src'],
+        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(2) > a')['href']
+    }
+    third_webtoon = {
+        'date': soup.select_one('#container > section > div > article.col.selected > div > h4').text,
+        'title': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(3) > a > div.info > strong').text,
+        'image': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(3) > a > div.thumb > img')['src'],
+        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(3) > a')['href']
+    }
+    doc = [first_webtoon,second_webtoon,third_webtoon]
+
+    return jsonify({'webtoons':doc})
+
+@app.route('/ktoon_comment/get', methods=["GET"])
+def comment_show_ktoon():
+    comment_list = list(db.ktoon_comments.find({}, {'_id':False}))
+    return jsonify({'comment':comment_list})
+# ktoon handler
+
 @app.route('/ktoon_webtoon', methods=["GET"])
 def get_ktoon():
     return render_template('ktoon.html')
