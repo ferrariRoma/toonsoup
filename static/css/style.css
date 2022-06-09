@@ -12,12 +12,12 @@
     font-style: normal;
 }
 
-.dropdown-menu, .sect-review {
-    font-family: 'SBAggroL';
-}
-
 h1, h2, h3, h4, h5, h6, .logo-toonsoup, .tit-review {
     font-family: 'SBAggroB';
+}
+
+.dropdown-menu, .sect-review, .rec-day {
+    font-family: 'SBAggroL';
 }
 
 .logo-toonsoup {
