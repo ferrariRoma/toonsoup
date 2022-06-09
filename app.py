@@ -69,5 +69,9 @@ def kakao():
 def get_ktoon():
     return render_template('ktoon.html')
 
+@app.route('/contact', methods=["GET"])
+def get_contact():
+    return render_template('contact.html')
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=4000, debug=True)
