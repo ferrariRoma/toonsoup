@@ -42,13 +42,13 @@ function handle_get_kakao() {
                     <article class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded overflow-hidden">
                             <!-- 웹툰 이미지 src에 넣기-->
-                            <img class="img-fluid" src=${image} alt="">
-                            <div class="position-relative p-4 pt-0">
-                                <h4 class="mt-5" id="title">${title}</h4>
-                                <p><span id="review">${date}요일 연재!</span><span> - </span><span id="author">작성자</span></p>
-                                <p id="star">⭐⭐⭐⭐⭐</p>
+                            <img id="card-image" class="img-fluid" src=${image} alt="">
+                            <div class="position-relative p-4">
+                                <h4 id="card-title" class="mt-2">${title}</h4>
+                                <p><span id="card-comment">${date}요일 연재!</span> - <span id="card-author">작성자</span></p>
+                                <p id="card-star">⭐⭐⭐⭐⭐</p>
                                 <!-- 웹툰 URL href에 넣기 -->
-                                <a class="small fw-medium" href="웹툰URL">웹툰으로 이동<i class="fa fa-arrow-right ms-2"></i></a>
+                                <a id="card-url" class="small fw-medium" href="웹툰URL">웹툰으로 이동<i class="fa fa-arrow-right ms-2"></i></a>
                             </div>
                         </div>
                     </article>
