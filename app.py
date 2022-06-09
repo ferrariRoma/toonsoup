@@ -54,6 +54,7 @@ def post_kakao():
         'image': "https:" + webtoons.select_one('a:nth-child(4) > li > div > div > div > img')['data-src'],
         'date': dates.select_one('li.css-wntfxn.e1201h8a0 > div').text
     }
+    print(third_toon)
     db.kakao.insert_one(first_toon)
     db.kakao.insert_one(second_toon)
     db.kakao.insert_one(third_toon)

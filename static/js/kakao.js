@@ -3,7 +3,16 @@ const record__btn = document.getElementById('record__btn');
 
 $(document).ready(function(){
     handle_get_kakao();
+    handle__close__btn()
 });
+
+function handle__close__btn() {
+    $('#post-box').hide();
+}
+
+function handle__open__btn() {
+    $('#post-box').show();
+}
 
 function handle_post_kakao() {
     const give_url = url.value;
@@ -58,3 +67,4 @@ function handle_get_kakao() {
         }
     })
 }
+
