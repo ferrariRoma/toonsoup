@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Solartec - Renewable Energy Website Template</title>
+    <title>툰숲🌳 | 네이버 웹툰 리뷰</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -54,7 +54,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="/" class="nav-item nav-link">Home</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle  active" data-bs-toggle="dropdown">Reviews</a>
                     <div class="dropdown-menu bg-light m-0">
@@ -88,49 +88,7 @@
                 <h6 class="text-primary">네이버 웹툰</h6>
                 <h1 class="mb-4">오늘의 추천 웹툰</h1>
             </div>
-            <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.5s">
-                <div class="col-lg-4 col-md-6 portfolio-item first">
-                    <div class="portfolio-img rounded overflow-hidden">
-                        <img class="img-fluid" src="/static/img/img-600x400-6.jpg" alt="">
-                        <div class="portfolio-btn">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i
-                                    class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="rec-day text-primary mb-0">목요일 연재</p>
-                        <hr class="text-primary w-25 my-2">
-                        <h5 class="lh-base">웹툰 제목</h5>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item second">
-                    <div class="portfolio-img rounded overflow-hidden">
-                        <img class="img-fluid" src="/static/img/img-600x400-5.jpg" alt="">
-                        <div class="portfolio-btn">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i
-                                    class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="rec-day text-primary mb-0">목요일 연재</p>
-                        <hr class="text-primary w-25 my-2">
-                        <h5 class="lh-base">웹툰 제목</h5>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item third">
-                    <div class="portfolio-img rounded overflow-hidden">
-                        <img class="img-fluid" src="/static/img/img-600x400-4.jpg" alt="">
-                        <div class="portfolio-btn">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i
-                                    class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="rec-day text-primary mb-0">목요일 연재</p>
-                        <hr class="text-primary w-25 my-2">
-                        <h5 class="lh-base">웹툰 제목</h5>
-                    </div>
-                </div>
+            <div id="recommended-webtoons" class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.5s">
             </div>
         </div>
     </div>
@@ -144,14 +102,14 @@
                 style="max-width: 600px;">
                 <h6 class="text-primary">네이버 웹툰</h6>
                 <h2 class="mb-4">한줄평 남기기</h2>
-                <button class="btn btn-primary rounded-pill py-3 px-5 mt-3" >CLICK :)</button>
+                <button id="btn-toggleform" class="btn btn-primary rounded-pill py-3 px-5 mt-3">CLICK :)</button>
                 <div class="mypost m-4" id="post-box">
                     <div class="form-floating mb-3">
                         <input id="url" type="email" class="form-control" placeholder="name@example.com">
-                        <label>웹툰URL</label>
+                        <label for="url">웹툰URL</label>
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">별점</label>
+                        <label class="input-group-text" for="star">별점</label>
                         <select class="form-select" id="star">
                             <option selected>-- 선택하기 --</option>
                             <option value="1">⭐</option>
@@ -163,28 +121,15 @@
                     </div>
                     <div class="form-floating">
                         <textarea id="comment" class="form-control" placeholder="Leave a comment here"></textarea>
-                        <label for="floatingTextarea2">한줄평</label>
+                        <label for="comment">한줄평</label>
                     </div>
                     <div class="mybtns m-4">
-                        <button type="button" id="record__btn" class="btn btn-primary">기록하기</button>
-                        <button onclick="close_box()" type="button" class="btn btn-outline-primary">닫기</button>
+                        <button type="button" id="btn-record" class="btn btn-primary">기록하기</button>
+                        <button type="button" id="btn-closeform" class="btn btn-outline-primary">닫기</button>
                     </div>
                 </div>
             </div>
             <div class="cont-review row g-4" id="poster">
-                <article class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item rounded overflow-hidden">
-                        <!-- 웹툰 이미지 src에 넣기-->
-                        <img id="card-image" class="img-fluid" src="/static/img/img-600x400-1.jpg" alt="">
-                        <div class="position-relative p-4">
-                            <h4 id="card-title" class="mt-2">웹툰 제목</h4>
-                            <p><span id="card-comment">한줄평</span> - <span id="card-author">작성자</span></p>
-                            <p id="card-star">⭐⭐⭐⭐⭐</p>
-                            <!-- 웹툰 URL href에 넣기 -->
-                            <a id="card-url" class="small fw-medium" href="웹툰URL">웹툰으로 이동<i class="fa fa-arrow-right ms-2"></i></a>
-                        </div>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
@@ -209,6 +154,9 @@
 
     <!-- Template Javascript -->
     <script src="/static/js/main.js"></script>
+
+    <!-- Crawling Javascript -->
+    <script src="/static/js/naver.js"></script>
 </body>
 
 </html>

@@ -43,6 +43,14 @@ h6,
   object-position: 0 15%;
 }
 
+#post-box {
+  display: none;
+}
+
+#post-box.show {
+  display: block;
+}
+
 /********** Template CSS **********/
 :root {
   --primary: #32c36c;
