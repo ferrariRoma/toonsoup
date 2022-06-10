@@ -20,9 +20,76 @@ db = client.dbtoonsoup
 def home():
     return render_template('index.html')
 
+# naver handler start
 @app.route('/naver_webtoon', methods=["GET"])
-def get_naver():
+def naver():
     return render_template('naver.html')
+
+@app.route('/naver_webtoon/post', methods=["POST"])
+def post_naver():
+    url_receive = request.form['url_give']
+    star_receive = request.form['star_give']
+    comment_receive = request.form['comment_give']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get(url_receive, headers)
+    soup = BeautifulSoup(data.text, 'html.parser')
+
+    title = soup.select_one('meta[property="og:title"]')['content']
+    image = soup.select_one('meta[property="og:image"]')['content']
+
+    doc = {
+        'title': title,
+        'image': image,
+        'url': url_receive,
+        'star': star_receive,
+        'comment': comment_receive,
+    }
+    db.naver.insert_one(doc)
+
+    return jsonify({'msg': '등록 완료!'})
+
+@app.route('/naver_webtoon/get', methods=["GET"])
+def get_naver():
+    reviews = list(db.naver.find({}, {'_id':False}))
+    return jsonify({'reviews': reviews})
+
+@app.route('/naver_webtoon/recommend', methods=["GET"])
+def get_naver_recommended():
+    url_receive = 'https://comic.naver.com/webtoon/weekday'
+
+    # bs4 and requests
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get(url_receive, headers=headers)
+    soup = BeautifulSoup(data.text, 'html.parser')
+
+    webtoons = soup.select_one('#content > div.list_area.daily_all > div.col.col_selected')
+    date = webtoons.select_one('div > h4 > span').text[:1]
+
+    first_toon = {
+        'title': webtoons.select_one('div > ul > li:nth-child(1) > a').text,
+        'url': "https://comic.naver.com"+webtoons.select_one('div > ul > li:nth-child(1) > a')['href'],
+        'image': webtoons.select_one('div > ul > li:nth-child(1) > div > a > img')['src'],
+        'date': date
+    }
+    second_toon = {
+        'title': webtoons.select_one('div > ul > li:nth-child(2) > a').text,
+        'url': "https://comic.naver.com" + webtoons.select_one('div > ul > li:nth-child(2) > a')['href'],
+        'image': webtoons.select_one('div > ul > li:nth-child(2) > div > a > img')['src'],
+        'date': date
+    }
+    third_toon = {
+        'title': webtoons.select_one('div > ul > li:nth-child(3) > a').text,
+        'url': "https://comic.naver.com" + webtoons.select_one('div > ul > li:nth-child(3) > a')['href'],
+        'image': webtoons.select_one('div > ul > li:nth-child(3) > div > a > img')['src'],
+        'date': date
+    }
+    doc = [first_toon, second_toon, third_toon]
+    return jsonify({'msg':'추천웹툰 업데이트 완료', 'webtoons': doc})
+# naver handler end
+
 
 # kakao handler start
 @app.route('/kakao_webtoon', methods=["GET"])
@@ -64,7 +131,6 @@ def kakao():
 def kakao__recommend():
     url_receive = 'https://page.kakao.com/main?categoryUid=10&subCategoryUid=1002'
 
-    # bs4 and requests
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
@@ -90,9 +156,10 @@ def kakao__recommend():
     }
     doc = [first_toon, second_toon, third_toon]
     return jsonify({'msg':'추천웹툰 업데이트 완료', 'webtoons': doc})
-
 # kakao handler end
 
+
+# ktoon handler start
 @app.route('/ktoon_comment/post', methods=['POST'])
 def comment_ktoon():
     url_receive = request.form['url_give']
@@ -152,11 +219,11 @@ def post_ktoon():
 def comment_show_ktoon():
     comment_list = list(db.ktoon_comments.find({}, {'_id':False}))
     return jsonify({'comment':comment_list})
-# ktoon handler
 
 @app.route('/ktoon_webtoon', methods=["GET"])
 def get_ktoon():
     return render_template('ktoon.html')
+# ktoon handler end
 
 @app.route('/contact', methods=["GET"])
 def get_contact():
