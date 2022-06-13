@@ -320,6 +320,33 @@ h6,
   background: var(--primary);
 }
 
+.width-30 {
+  width: 30%;
+}
+.webtoon-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.now {
+  font-family: "SBAggroM";
+  cursor: default;
+  font-size: 3em;
+}
+.title {
+  font-family: "SBAggroL";
+  color: var(--primary);
+  cursor: pointer;
+  text-align: center;
+  font-size: 2rem;
+  display: inherit;
+  padding: 0.5em;
+}
+.index-thumbnail {
+  width: 400px;
+  height: 400px;
+}
+
 /*** Feature ***/
 @media (min-width: 992px) {
   .container.feature {
