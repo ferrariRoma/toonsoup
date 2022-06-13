@@ -40,7 +40,6 @@
   show_webtoon();
 
   let now = new Date().getDay();
-  console.log(now)
   let dayOfweek = new Array(
     "월요일",
     "화요일",
@@ -51,14 +50,13 @@
     "일요일"
   );
   let today = dayOfweek[now - 1];
-  console.log(today);
   document.querySelector(".now").innerHTML = `${today}의 <br> 웹툰 추천작은?`;
 
   function show_webtoon (){
 
     $.ajax({
       type: 'GET',
-      url: '/naver_webtoon/recommend',
+      url: '/index_naver',
       data: {},
       success: function (response){
 
@@ -72,7 +70,7 @@
           let temp_naver = `<div class="row mb-4">
                                 <div class="fadeInUp" data-wow-delay="0.1s">
                                     <div class="service-item rounded overflow-hidden">
-                                        <img class="img-fluid"
+                                        <img class="index-thumbnail"
                                             src=${image}
                                             alt="">
                                         <div class="position-relative p-4 pt-0">
@@ -94,7 +92,7 @@
 
     $.ajax({
       type: 'GET',
-      url: '/kakao_webtoon/recommend',
+      url: '/index_kakao',
       data: {},
       success: function (response){
 
@@ -108,7 +106,7 @@
           let temp_kakao = `<div class="row mb-4">
                                 <div class="fadeInUp" data-wow-delay="0.1s">
                                     <div class="service-item rounded overflow-hidden">
-                                        <img class="img-fluid"
+                                        <img class="index-thumbnail"
                                             src=${image}
                                             alt="">
                                         <div class="position-relative p-4 pt-0">
@@ -129,7 +127,7 @@
 
     $.ajax({
       type: 'GET',
-      url: '/ktoon/recommend',
+      url: '/index_ktoon',
       data: {},
       success: function (response){
 
@@ -143,7 +141,7 @@
           let temp_kakao = `<div class="row mb-4">
                                 <div class="fadeInUp" data-wow-delay="0.1s">
                                     <div class="service-item rounded overflow-hidden">
-                                        <img class="img-fluid"
+                                        <img class="index-thumbnail"
                                             src=${image}
                                             alt="">
                                         <div class="position-relative p-4 pt-0">
