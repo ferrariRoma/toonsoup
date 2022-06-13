@@ -72,21 +72,38 @@ def get_naver_recommended():
         'title': webtoons.select_one('div > ul > li:nth-child(1) > a').text,
         'url': "https://comic.naver.com"+webtoons.select_one('div > ul > li:nth-child(1) > a')['href'],
         'image': webtoons.select_one('div > ul > li:nth-child(1) > div > a > img')['src'],
-        'date': date
+        'date': date,
+        'index': 1
     }
     second_toon = {
         'title': webtoons.select_one('div > ul > li:nth-child(2) > a').text,
         'url': "https://comic.naver.com" + webtoons.select_one('div > ul > li:nth-child(2) > a')['href'],
         'image': webtoons.select_one('div > ul > li:nth-child(2) > div > a > img')['src'],
-        'date': date
+        'date': date,
+        'index': 2
     }
     third_toon = {
         'title': webtoons.select_one('div > ul > li:nth-child(3) > a').text,
         'url': "https://comic.naver.com" + webtoons.select_one('div > ul > li:nth-child(3) > a')['href'],
         'image': webtoons.select_one('div > ul > li:nth-child(3) > div > a > img')['src'],
-        'date': date
+        'date': date,
+        'index': 3
     }
-    doc = [first_toon, second_toon, third_toon]
+    fourth_toon = {
+        'title': webtoons.select_one('div > ul > li:nth-child(4) > a').text,
+        'url': "https://comic.naver.com" + webtoons.select_one('div > ul > li:nth-child(4) > a')['href'],
+        'image': webtoons.select_one('div > ul > li:nth-child(4) > div > a > img')['src'],
+        'date': date,
+        'index': 4
+    }
+    fifth_toon = {
+        'title': webtoons.select_one('div > ul > li:nth-child(5) > a').text,
+        'url': "https://comic.naver.com" + webtoons.select_one('div > ul > li:nth-child(5) > a')['href'],
+        'image': webtoons.select_one('div > ul > li:nth-child(5) > div > a > img')['src'],
+        'date': date,
+        'index': 5
+    }
+    doc = [first_toon, second_toon, third_toon, fourth_toon, fifth_toon]
     return jsonify({'msg':'추천웹툰 업데이트 완료', 'webtoons': doc})
 # naver handler end
 
@@ -140,21 +157,38 @@ def kakao__recommend():
         'title' : webtoons.select_one('a:nth-child(2) > li > div > div > div > img')['alt'],
         'url' : "https://page.kakao.com"+webtoons.select_one('a:nth-child(2)')['href'],
         'image' : "https:"+webtoons.select_one('a:nth-child(2) > li > div > div > div > img')['data-src'],
-        'date' : dates.select_one('li.css-wntfxn.e1201h8a0 > div').text
+        'date' : dates.select_one('li.css-wntfxn.e1201h8a0 > div').text,
+        'index' : 1
     }
     second_toon = {
         'title': webtoons.select_one('a:nth-child(3) > li > div > div > div > img')['alt'],
         'url' : "https://page.kakao.com"+webtoons.select_one('a:nth-child(3)')['href'],
         'image': "https:" + webtoons.select_one('a:nth-child(3) > li > div > div > div > img')['data-src'],
-        'date': dates.select_one('li.css-wntfxn.e1201h8a0 > div').text
+        'date': dates.select_one('li.css-wntfxn.e1201h8a0 > div').text,
+        'index' : 2
     }
     third_toon = {
         'title': webtoons.select_one('a:nth-child(4) > li > div > div > div > img')['alt'],
         'url' : "https://page.kakao.com"+webtoons.select_one('a:nth-child(4)')['href'],
         'image': "https:" + webtoons.select_one('a:nth-child(4) > li > div > div > div > img')['data-src'],
-        'date': dates.select_one('li.css-wntfxn.e1201h8a0 > div').text
+        'date': dates.select_one('li.css-wntfxn.e1201h8a0 > div').text,
+        'index' : 3
     }
-    doc = [first_toon, second_toon, third_toon]
+    fourth_toon = {
+        'title': webtoons.select_one('a:nth-child(5) > li > div > div > div > img')['alt'],
+        'url': "https://page.kakao.com" + webtoons.select_one('a:nth-child(5)')['href'],
+        'image': "https:" + webtoons.select_one('a:nth-child(5) > li > div > div > div > img')['data-src'],
+        'date': dates.select_one('li.css-wntfxn.e1201h8a0 > div').text,
+        'index': 4
+    }
+    fifth_toon = {
+        'title': webtoons.select_one('a:nth-child(6) > li > div > div > div > img')['alt'],
+        'url': "https://page.kakao.com" + webtoons.select_one('a:nth-child(6)')['href'],
+        'image': "https:" + webtoons.select_one('a:nth-child(6) > li > div > div > div > img')['data-src'],
+        'date': dates.select_one('li.css-wntfxn.e1201h8a0 > div').text,
+        'index': 5
+    }
+    doc = [first_toon, second_toon, third_toon, fourth_toon, fifth_toon]
     return jsonify({'msg':'추천웹툰 업데이트 완료', 'webtoons': doc})
 # kakao handler end
 
@@ -194,24 +228,41 @@ def post_ktoon():
 
 
     first_webtoon = {
-        'date' : soup.select_one('#container > section > div > article.col.selected > div > h4').text,
-        'title' : soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a > div.info > strong').text,
-        'image' : soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a > div.thumb > img')['src'],
-        'url' : soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a')['href']
+        'date': soup.select_one('#container > section > div > article.col.selected > div > h4').text,
+        'title': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a > div.info > strong').text,
+        'image': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a > div.thumb > img')['src'],
+        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(1) > a')['href'],
+        'index': 1,
     }
     second_webtoon = {
         'date': soup.select_one('#container > section > div > article.col.selected > div > h4').text,
         'title': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(2) > a > div.info > strong').text,
         'image': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(2) > a > div.thumb > img')['src'],
-        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(2) > a')['href']
+        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(2) > a')['href'],
+        'index': 2,
     }
     third_webtoon = {
         'date': soup.select_one('#container > section > div > article.col.selected > div > h4').text,
         'title': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(3) > a > div.info > strong').text,
         'image': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(3) > a > div.thumb > img')['src'],
-        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(3) > a')['href']
+        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(3) > a')['href'],
+        "index": 3,
     }
-    doc = [first_webtoon,second_webtoon,third_webtoon]
+    fourth_webtoon = {
+        'date': soup.select_one('#container > section > div > article.col.selected > div > h4').text,
+        'title': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(4) > a > div.info > strong').text,
+        'image': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(4) > a > div.thumb > img')['src'],
+        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(4) > a')['href'],
+        'index': 4,
+    }
+    fifth_webtoon = {
+        'date': soup.select_one('#container > section > div > article.col.selected > div > h4').text,
+        'title': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(5) > a > div.info > strong').text,
+        'image': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(5) > a > div.thumb > img')['src'],
+        'url': soup.select_one('#container > section > div > article.col.selected > div > ul > li:nth-child(5) > a')['href'],
+        'index': 5,
+    }
+    doc = [first_webtoon, second_webtoon, third_webtoon, fourth_webtoon, fifth_webtoon]
 
     return jsonify({'webtoons':doc})
 
@@ -231,3 +282,6 @@ def get_contact():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=4000, debug=True)
+
+#container > section > div > article 그날
+#container > section > div > article.col.selected 평범
