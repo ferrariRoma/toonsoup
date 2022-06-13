@@ -14,17 +14,6 @@
   font-style: normal;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.logo-toonsoup,
-.tit-review {
-  font-family: "SBAggroB";
-}
-
 .dropdown-menu,
 .sect-review,
 .rec-day {
@@ -659,4 +648,16 @@ h6,
 
 .footer .copyright a:hover {
   color: var(--primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo-toonsoup,
+.now,
+.tit-review {
+  font-family: "SBAggroB";
 }
