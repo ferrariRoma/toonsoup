@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/signstyle.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="m-0 text-primary logo-toonsoup">툰숲🌳</h1>
+    </div>
+    <div class="container">
+        <div class="wrap">
+            <h1 class="title">로그인</h1>
+            <form class="int-form" action="">
+                <div class="int-area">
+                    <input class="float-input input" id="id" name="id" type="text" autocomplete="off" required>
+                    <label for="id" class="label">아이디</label>
+                </div>
+                <div class="int-area">
+                    <input class="float-input input" id="pw" name="pw" type="password" autocomplete="off" required>
+                    <label for="pw" class="label">비밀번호</label>
+                </div>
+                <div class="alert-area">
+                    <p id="error-alert">아이디 또는 비밀번호를 잘못 입력했습니다.<br>
+                        입력하신 내용을 다시 확인해주세요.</p>
+                </div>
+                <div class="btn-area">
+                    <button onclick="login()" class="btn" type="button">로그인</button>
+                </div>
+            </form>
+            <hr>
+            <div class="caption">
+                <a href="/signup">
+                    <p>TOONSOUP 회원이 아니신가요? <span>지금 가입하세요.</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // 인풋이 비어있으면 버튼을 비활성화
+
+        $('.btn').attr('disabled', 'disabled');
+        $(document).ready(function () {
+            $('.int-form input').keyup(function () {
+
+                var empty = false;
+                $('.int-form input').each(function () {
+                    if ($(this).val().length == 0) {
+                        empty = true;
+                    }
+                });
+
+                if (empty) {
+                    $('.btn').attr('disabled', 'disabled');
+                } else {
+                    $('.btn').removeAttr('disabled');
+                }
+            });
+        });
+
+        // 버튼을 눌렀을 때, DB에서 아이디를 찾고, 로그인을 진행하는 코드
+        const login = () => {
+            let id = $('#id').val()
+            let pw = $('#pw').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/login/post",
+                data: {
+                    id_give: id,
+                    pw_give: pw
+                },
+                success: function (response) {
+                    const account = response['account']
+
+                    if (account.length === 0) {
+                        $('#error-alert').show()
+                    } else {
+                        const accountId = account[0]['id']
+                        const accountName = account[0]['name']
+                        const accountPw = account[0]['pw']
+
+                        if (pw != accountPw) {
+                            $('#error-alert').show()
+                        } else if (pw == accountPw) {
+                            window.location.replace('/')
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
