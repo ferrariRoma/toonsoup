@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/signstyle.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="m-0 text-primary logo-toonsoup">툰숲🌳</h1>
+    </header>
+    <div class="container">
+        <div class="wrap">
+            <div>
+                <h1 class="title">회원가입</h1>
+                <p class="sub-title">TOONSOUP에서 다양한 웹툰에 대한 정보와 <br>의견을 나눠보세요!</p>
+            </div>
+            <hr class="signUp-div" />
+            <form id="signup" action="">
+                <div>
+                    <h3><label for="name">이름</label></h3>
+                    <input class="input" id="name" type="text" autocomplete="off" required>
+                    <h3><label for="id">아이디</label></h3>
+                    <input class="input" id="id" type="text" autocomplete="off" required>
+                    <h3><label for="pw">비밀번호</label></h3>
+                    <input onchange="checkPw()" class="input" id="pw" type="password" autocomplete="off" required>
+                    <h3><label for="pwConfirm">비밀번호 재확인</label></h3>
+                    <input onchange="checkPw()" class="input" id="pw2" type="password" autocomplete="off" required>
+                    <p id="error-alert">비밀번호가 일치하지 않습니다.</p>
+                </div>
+                <div>
+                    <button onClick="signUp()" class="btn" id="btn" type="submit">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // 회원가입의 필도가 비어있으면 버튼을 비활성화하는 코드
+        $('.btn').attr('disabled', 'disabled');
+        $(document).ready(function () {
+            $('#signup input').keyup(function () {
+
+                var empty = false;
+                $('#signup input').each(function () {
+                    if ($(this).val().length == 0) {
+                        empty = true;
+                    }
+                });
+
+                if (empty) {
+                    $('.btn').attr('disabled', 'disabled');
+                } else {
+                    $('.btn').removeAttr('disabled');
+                }
+            });
+        });
+
+
+        // 비밀번호와 재확인이 서로 맞지 않으면 경고를 출력하는 코드
+        const checkPw = () => {
+            if (document.querySelector('#pw').value != '' && document.querySelector('#pw2').value != '') {
+                if (document.querySelector('#pw').value == document.querySelector('#pw2').value) {
+                    document.querySelector('#error-alert').innerText = '비밀번호가 일치합니다.'
+                    document.querySelector('#error-alert').style.color = 'blue';
+                    $('#error-alert').show()
+                }
+                else {
+                    document.querySelector('#error-alert').innerText = '비밀번호가 일치하지 않습니다.';
+                    document.querySelector('#error-alert').style.color = 'red';
+                    $('#error-alert').show()
+                }
+            }
+        }
+
+
+        // 회원가입 버튼 눌렀을 때 DB에 데이터를 저장하는 코드
+        const signUp = () => {
+            if (document.querySelector('#pw').value == document.querySelector('#pw2').value) {
+                let name = $('#name').val()
+                let id = $('#id').val()
+                let pw = $('#pw').val()
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/signup/post',
+                    data: {
+                        name_give: name,
+                        id_give: id,
+                        pw_give: pw
+                    },
+                    success: function (response) {
+                        alert(response['msg'])
+                        window.location.replace('/login')
+                    }
+                })
+            } else {
+                alert('입력한 정보를 확인해주세요.')
+            }
+
+        }
+    </script>
+</body>
+
+</html>

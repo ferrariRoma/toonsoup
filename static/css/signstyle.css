@@ -1,0 +1,156 @@
+@import url(./reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+@font-face {
+    font-family: "SBAggroL";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "SBAggroB";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {box-sizing: border-box;}
+body {
+    font-family: 'SBAggroL', 'Noto Sans KR', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.logo-toonsoup {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    font-family: "SBAggroB";
+    font-size: 40px;
+}
+
+.container {
+    width: 500px;
+    height: 700px;
+    margin-top: 100px;
+    position: relative;
+    z-index: 2;
+}
+.wrap {padding: 60px;}
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+}
+
+.int-form {margin-top: 16px;}
+.int-area {
+    width: 380px;
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    height: 50px;
+    padding: 14px 28px;
+    border: 1px solid #cccccc;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: black;
+    outline: none;
+}
+
+.float-input {padding: 24px 28px 8px 28px;}
+.label {
+    position: absolute;
+    top: 34px;
+    left: 28px;
+    font-size: 16px;
+    color: #858585;
+    transition: top .5s ease;
+}
+
+.int-area input:focus + label,
+.int-area input:valid + label {
+    top: 30px;
+    font-size: 11px;
+}
+
+#error-alert {
+    display: none;
+    margin-top: 14px;
+    line-height: 1.625;
+    color: red;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 40px;
+    background-color: #32C36C;
+    font-family: "SBAggroL";
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+}
+.btn:disabled {background-color: #858585;}
+
+.sub-btn-area {
+    margin-top: 28px;
+    text-align: center;
+}
+.sub-btn-area .checkbox {
+    width: 16px;
+    height: 16px;
+}
+.sub-btn-area p {
+    font-size: 14px;
+    color: #858585;
+    display: inline-block;
+}
+
+hr {
+    margin-top: 60px;
+    border: 1px solid #E0E0E0;
+}
+
+.caption {margin-top: 40px;}
+.caption a {
+    font-size: 16px;
+    text-align: center;
+    color: #858585;
+    text-decoration: none;
+}
+.caption a span {font-weight: 700;}
+.caption a p {margin-top: 12px;}
+
+.sub-title {
+    margin-top: 12px;
+    color: black;
+    text-align: center;
+    line-height: 1.625;
+}
+
+.signUp-div {
+    border: 1px solid #E0E0E0;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+#signup h3 {margin-top: 20px;}
+#signup label {
+    font-size: 14px;
+    font-weight: 700;
+}
+#signup input {
+    margin-top: 12px;
+}

@@ -427,5 +427,45 @@ def get_ktoon():
 def get_contact():
     return render_template('contact.html')
 
+# login & signup handler start
+@app.route('/login', methods=["GET"])
+def login():
+    return render_template('login.html')
+
+@app.route('/signup', methods=["GET"])
+def signup():
+    return render_template('signup.html')
+
+
+    # signup back
+@app.route("/signup/post", methods=["POST"])
+def signup_post():
+    name_receive = request.form['name_give']
+    id_receive = request.form['id_give']
+    pw_receive = request.form['pw_give']
+
+    doc = {
+        'name' : name_receive,
+        'id' : id_receive,
+        'pw' : pw_receive      
+    }
+
+    db.account.insert_one(doc)
+
+    return jsonify({'msg':'회원가입이 완료되었습니다.'})
+
+
+    # login back
+@app.route("/login/post", methods=["POST"])
+def login_post():
+    id_receive = request.form['id_give']
+
+    account_list = list(db.account.find({'id' : id_receive}, {'_id' : False}))
+    
+    return jsonify({'account': account_list})
+    
+# login & signup handler end
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=4000, debug=True)
