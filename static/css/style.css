@@ -14,17 +14,6 @@
   font-style: normal;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.logo-toonsoup,
-.tit-review {
-  font-family: "SBAggroB";
-}
-
 .dropdown-menu,
 .sect-review,
 .rec-day {
@@ -318,6 +307,33 @@ h6,
 .service-item:hover .service-icon {
   color: #ffffff;
   background: var(--primary);
+}
+
+.width-30 {
+  width: 30%;
+}
+.webtoon-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.now {
+  font-family: "SBAggroM";
+  cursor: default;
+  font-size: 3em;
+}
+.title {
+  font-family: "SBAggroL";
+  color: var(--primary);
+  cursor: pointer;
+  text-align: center;
+  font-size: 2rem;
+  display: inherit;
+  padding: 0.5em;
+}
+.index-thumbnail {
+  width: 400px;
+  height: 400px;
 }
 
 /*** Feature ***/
@@ -632,4 +648,16 @@ h6,
 
 .footer .copyright a:hover {
   color: var(--primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo-toonsoup,
+.now,
+.tit-review {
+  font-family: "SBAggroB";
 }
