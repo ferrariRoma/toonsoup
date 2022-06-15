@@ -1,12 +1,14 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, redirect, render_template, request, jsonify, url_for
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
 import requests
 from bs4 import BeautifulSoup
+from flask_bcrypt import Bcrypt
 
-# Flask
+# Flask & bcrypt
 app = Flask(__name__)
+bcrypt = Bcrypt(app);
 # .env
 load_dotenv()
 ID = os.environ.get('DB_ID')
@@ -437,25 +439,30 @@ def signup():
     return render_template('signup.html')
 
 
-    # signup back
+    # signup post
 @app.route("/signup/post", methods=["POST"])
 def signup_post():
-    name_receive = request.form['name_give']
-    id_receive = request.form['id_give']
-    pw_receive = request.form['pw_give']
+    data = request.get_json()
+    receive__id = data['giving__id']
+    receive__pw = data['giving__pw']
+    receive__confirm__pw = data['giving__confirm__pw']
+    # 예외처리해야 됨(비밀번호 불일치)
+    hashed__pw = bcrypt.generate_password_hash(receive__pw, 10);
+    checked__pw = bcrypt.check_password_hash(hashed__pw, receive__confirm__pw);
+    if checked__pw==False:
+        return jsonify({'msg':"비밀번호가 틀립니다."})
+        # return render_template('signup.html',msg="비밀번호가 틀립니다.")
+    else:
+        # doc = {
+        #     'id' : receive__id,
+        #     'pw' : hashed__pw,    
+        # }
+        # db.account.insert_one(doc)
+        print('생성완료')
+        return redirect(url_for('login'))
 
-    doc = {
-        'name' : name_receive,
-        'id' : id_receive,
-        'pw' : pw_receive      
-    }
 
-    db.account.insert_one(doc)
-
-    return jsonify({'msg':'회원가입이 완료되었습니다.'})
-
-
-    # login back
+    # login post
 @app.route("/login/post", methods=["POST"])
 def login_post():
     id_receive = request.form['id_give']
