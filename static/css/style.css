@@ -312,7 +312,7 @@
 .width-30 {
   width: 30%;
 }
-.webtoon-container{
+.webtoon-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -660,4 +660,42 @@ h6,
 .now,
 .tit-review {
   font-family: "SBAggroB";
+}
+
+.login__form__container {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__form__container > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__form__container > form > input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s linear;
+  margin-bottom: 15px;
+  width: 300px;
+  height: 50px;
+}
+
+.login__form__container > form > input:focus {
+  outline: none;
+  border-bottom: 2px solid #51cc82;
+}
+
+.login__form__container > form > button {
+  width: 200px;
+  margin-top: 20px;
+}
+
+.login__form__container > a {
+  margin-top: 20px;
 }
