@@ -489,7 +489,6 @@ def login_post():
     checked__pw = bcrypt.check_password_hash(checked__id['pw'], receive__pw);
     if checked__pw==False:
         return jsonify({'msg':"비밀번호가 일치하지 않습니다."})
-    redirect(url_for('signup'))
     return jsonify({'msg':"로그인 성공!"})
 # login & signup handler end
 
