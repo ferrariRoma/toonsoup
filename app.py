@@ -1,3 +1,5 @@
+from fileinput import filename
+from tabnanny import check
 from flask import Flask, redirect, render_template, request, jsonify, url_for
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -446,20 +448,27 @@ def signup_post():
     receive__id = data['giving__id']
     receive__pw = data['giving__pw']
     receive__confirm__pw = data['giving__confirm__pw']
-    # 예외처리해야 됨(비밀번호 불일치)
+
+    # 예외처리해야 됨(빈 값, ID중복, 비밀번호 불일치)
+    if receive__id=='' or receive__pw=='' or receive__confirm__pw=='':
+        return jsonify({'msg':"ID나 PW를 입력해주세요."})
+
+    checked__id = db.account.find_one({"id":receive__id})
+    if checked__id:
+        return jsonify({'msg':"이미 존재하는 ID입니다."})
+    
     hashed__pw = bcrypt.generate_password_hash(receive__pw, 10);
     checked__pw = bcrypt.check_password_hash(hashed__pw, receive__confirm__pw);
     if checked__pw==False:
         return jsonify({'msg':"비밀번호가 틀립니다."})
-        # return render_template('signup.html',msg="비밀번호가 틀립니다.")
-    else:
-        # doc = {
-        #     'id' : receive__id,
-        #     'pw' : hashed__pw,    
-        # }
-        # db.account.insert_one(doc)
-        print('생성완료')
-        return redirect(url_for('login'))
+
+    # 데이터 저장
+    doc = {
+        'id' : receive__id,
+        'pw' : hashed__pw,    
+    }
+    db.account.insert_one(doc)
+    return jsonify({'msg':"회원가입 완료! 로그인을 해주세요"})
 
 
     # login post
