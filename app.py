@@ -474,12 +474,23 @@ def signup_post():
     # login post
 @app.route("/login/post", methods=["POST"])
 def login_post():
-    id_receive = request.form['id_give']
+    data = request.get_json()
+    receive__id = data['giving__id']
+    receive__pw = data['giving__pw']
 
-    account_list = list(db.account.find({'id' : id_receive}, {'_id' : False}))
+    # 예외처리(빈 칸, 아이디/비밀번호 불일치)
+    if receive__id=='' or receive__pw=='':
+        return jsonify({'msg':"ID나 PW를 입력해주세요."})
     
-    return jsonify({'account': account_list})
-    
+    checked__id = db.account.find_one({"id":receive__id},{"_id":False})
+    if not checked__id:
+        return jsonify({'msg':"존재하지 않는 ID입니다."})
+
+    checked__pw = bcrypt.check_password_hash(checked__id['pw'], receive__pw);
+    if checked__pw==False:
+        return jsonify({'msg':"비밀번호가 일치하지 않습니다."})
+    redirect(url_for('signup'))
+    return jsonify({'msg':"로그인 성공!"})
 # login & signup handler end
 
 

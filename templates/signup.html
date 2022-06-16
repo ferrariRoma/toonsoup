@@ -92,7 +92,7 @@
     <!-- login start -->
     <div class="login__form__container">
       <h2 class="title">Sign Up</h2>
-      <form>
+      <form method="POST" action="/signup/post">
         <input type="text" placeholder="ID" id="signup__id" />
         <input type="password" placeholder="PW" id="signup__pw" />
         <input
@@ -109,7 +109,6 @@
       </form>
       <a href="/login" class="small fw-medium">login</a>
     </div>
-    <span> {{msg}} </span>
     <!-- login form end -->
   </body>
 
