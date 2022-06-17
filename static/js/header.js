@@ -10,7 +10,6 @@ const renderLogBtn = () => {
     }
 }
 renderLogBtn();
-console.log('테스트')
 
 const btnLogout = document.querySelector('.btn-logout');
 btnLogout.addEventListener('click', (e) => {
