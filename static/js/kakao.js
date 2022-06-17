@@ -19,6 +19,7 @@ function handle_post_kakao() {
   const give_url = url.value;
   const give_star = $("#star").val();
   const give_comment = $("#comment").val();
+  const give_username = localStorage.getItem('username');
 
   $.ajax({
     type: "POST",
@@ -27,6 +28,7 @@ function handle_post_kakao() {
       give_url,
       give_star,
       give_comment,
+      give_username,
     },
     success: function (res) {
       alert(res["msg"]);
@@ -50,6 +52,7 @@ function handle_get_kakao() {
         url = webtoons[i]["url"];
         star = "⭐".repeat(webtoons[i]["star"]);
         comment = webtoons[i]["comment"];
+        username = webtoons[i]["username"] ?? '익명';
         let temp_html = `
                     <article class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded overflow-hidden">
@@ -57,7 +60,7 @@ function handle_get_kakao() {
                             <img id="card-image" class="img-fluid" src=${image} alt="">
                             <div class="position-relative p-4">
                                 <h4 id="card-title" class="mt-2">${title}</h4>
-                                <p><span id="card-comment">${comment}</span> - <span id="card-author">작성자</span></p>
+                                <p><span id="card-comment">${comment}</span> - <span id="card-author">${username}</span></p>
                                 <p id="card-star">${star}</p>
                                 <!-- 웹툰 URL href에 넣기 -->
                                 <a id="card-url" class="small fw-medium" href=${url}>웹툰으로 이동<i class="fa fa-arrow-right ms-2"></i></a>

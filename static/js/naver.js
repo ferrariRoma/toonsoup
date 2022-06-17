@@ -33,6 +33,7 @@ function postNaverReview() {
       url_give: url,
       star_give: star,
       comment_give: comment,
+      username_give: localStorage.getItem('username'),
     },
     success: function (res) {
       alert(res['msg']);
@@ -54,6 +55,7 @@ function getNaverReview() {
         let url = review.url;
         let star = '⭐'.repeat(reviews.star);
         let comment = review.comment;
+        let username = review.username ?? '익명';
 
         let tempHtml = `
                     <article class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
@@ -61,7 +63,7 @@ function getNaverReview() {
                             <img id="card-image" class="img-fluid" src=${image} alt="">
                             <div class="position-relative p-4">
                                 <h4 id="card-title" class="mt-2">${title}</h4>
-                                <p><span id="card-comment">${comment}</span> - <span id="card-author">작성자</span></p>
+                                <p><span id="card-comment">${comment}</span> - <span id="card-author">${username}</span></p>
                                 <p id="card-star">${star}</p>
                                 <a id="card-url" class="small fw-medium" href=${url}>웹툰으로 이동<i class="fa fa-arrow-right ms-2"></i></a>
                             </div>
