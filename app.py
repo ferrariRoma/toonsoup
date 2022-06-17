@@ -501,6 +501,6 @@ def login_post():
     return jsonify({'msg':"로그인 성공!", 'username': username})
 # login & signup handler end
 
-if __name__ == '__main__':
-    # app.run('0.0.0.0', port= PORT, debug=True)
-    app.run()
+if __name__ == "__main__":
+  port = int(os.environ.get("PORT", 5000))
+  app.run(host="0.0.0.0", port=port)
