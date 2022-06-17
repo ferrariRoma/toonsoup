@@ -13,10 +13,9 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app);
 # .env
 load_dotenv()
-ID = os.environ.get('DB_ID')
-PW = os.environ.get('DB_PW')
+DB_URL = os.environ.get('DB_URL')
 # DB
-client = MongoClient("mongodb+srv://"+ID+":"+PW+"@cluster0.ye3qx.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(DB_URL)
 db = client.dbtoonsoup
 
 #index handler start
@@ -502,6 +501,6 @@ def login_post():
     return jsonify({'msg':"로그인 성공!", 'username': username})
 # login & signup handler end
 
-
+PORT = os.environ.get(PORT) or 44000
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=44000, debug=True)
+    app.run('0.0.0.0', port= PORT, debug=True)
