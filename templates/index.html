@@ -32,6 +32,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
     />
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <script defer src="/static/js/header.js"></script>
   </head>
 
   <body>
@@ -71,8 +72,7 @@
               href="#"
               class="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
-              >Reviews</a
-            >
+              >Reviews</a>
             <div class="dropdown-menu bg-light m-0">
               <a href="/naver_webtoon" class="dropdown-item">네이버웹툰</a>
               <a href="/kakao_webtoon" class="dropdown-item">카카오페이지</a>
@@ -83,8 +83,9 @@
         </div>
         <a
           href="/login"
+          id="btn-log"
           class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block"
-          >Login<i class="fa fa-arrow-right ms-3"></i
+          ><i class="fa fa-arrow-right ms-3 arrow-login"></i
         ></a>
       </div>
     </nav>
