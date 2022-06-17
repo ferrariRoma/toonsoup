@@ -448,10 +448,11 @@ def signup_post():
     receive__id = data['giving__id']
     receive__pw = data['giving__pw']
     receive__confirm__pw = data['giving__confirm__pw']
+    receive__name = data['giving__name']
 
     # 예외처리해야 됨(빈 값, ID중복, 비밀번호 불일치)
-    if receive__id=='' or receive__pw=='' or receive__confirm__pw=='':
-        return jsonify({'msg':"ID나 PW를 입력해주세요."})
+    if receive__id=='' or receive__pw=='' or receive__confirm__pw=='' or receive__name=='':
+        return jsonify({'msg':"모두 입력해주세요."})
 
     checked__id = db.account.find_one({"id":receive__id})
     if checked__id:
@@ -460,15 +461,16 @@ def signup_post():
     hashed__pw = bcrypt.generate_password_hash(receive__pw, 10);
     checked__pw = bcrypt.check_password_hash(hashed__pw, receive__confirm__pw);
     if checked__pw==False:
-        return jsonify({'msg':"비밀번호가 틀립니다."})
+        return jsonify({'msg':"비밀번호가 같지 않습니다."})
 
     # 데이터 저장
     doc = {
         'id' : receive__id,
-        'pw' : hashed__pw,    
+        'pw' : hashed__pw,
+        'username' : receive__name,
     }
     db.account.insert_one(doc)
-    return jsonify({'msg':"회원가입 완료! 로그인을 해주세요"})
+    return jsonify({'successMsg':"회원가입 완료! 로그인을 해주세요"})
 
 
     # login post
@@ -486,10 +488,12 @@ def login_post():
     if not checked__id:
         return jsonify({'msg':"존재하지 않는 ID입니다."})
 
-    checked__pw = bcrypt.check_password_hash(checked__id['pw'], receive__pw);
+    checked__pw = bcrypt.check_password_hash(checked__id['pw'], receive__pw)
     if checked__pw==False:
         return jsonify({'msg':"비밀번호가 일치하지 않습니다."})
-    return jsonify({'msg':"로그인 성공!"})
+
+    username = checked__id['username']
+    return jsonify({'msg':"로그인 성공!", 'username': username})
 # login & signup handler end
 
 

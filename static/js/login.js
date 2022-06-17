@@ -20,7 +20,9 @@ async function postLogin(e) {
       body: JSON.stringify(data),
     });
     const jsoned = await res.json();
+    localStorage.setItem('username', jsoned["username"]);
     alert(jsoned["msg"]);
+    window.location.href = '/';
   } catch (err) {
     console.log(err);
   }
