@@ -11,6 +11,7 @@ function show_comment() {
                 let title = rows[i]['title']
                 let star = rows[i]['star']
                 let comment = rows[i]['comment']
+                let username = rows[i]['username'] ?? '익명';
 
                 let star_image = '⭐'.repeat(star)
 
@@ -20,7 +21,7 @@ function show_comment() {
                                                 <img id="card-image" class="img-fluid" src=${image} alt="">
                                                 <div class="position-relative p-4">
                                                     <h4 id="card-title" class="mt-2">${title}</h4>
-                                                    <p><span id="card-comment">${comment}</span> - <span id="card-author">작성자</span></p>
+                                                    <p><span id="card-comment">${comment}</span> - <span id="card-author">${username}</span></p>
                                                     <p id="card-star">${star_image}</p>
                                                     <!-- 웹툰 URL href에 넣기 -->
                                                     <a id="card-url" class="small fw-medium" href="${url}">웹툰으로 이동<i class="fa fa-arrow-right ms-2"></i></a>
@@ -75,11 +76,12 @@ function save_comment() {
     let url = $('#url').val()
     let star = $('#star').val()
     let comment = $('#comment').val()
+    let username = localStorage.getItem('username')
 
     $.ajax({
         type: 'POST',
         url: '/ktoon_comment/post',
-        data: {url_give: url, star_give: star, comment_give: comment},
+        data: {url_give: url, star_give: star, comment_give: comment, username_give: username},
         success: function (response) {
             alert(response['msg'])
             window.location.reload()

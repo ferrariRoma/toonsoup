@@ -181,6 +181,7 @@ def post_naver():
     url_receive = request.form['url_give']
     star_receive = request.form['star_give']
     comment_receive = request.form['comment_give']
+    username_receive = request.form['username_give']
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -191,6 +192,7 @@ def post_naver():
     image = soup.select_one('meta[property="og:image"]')['content']
 
     doc = {
+        'username': username_receive,
         'title': title,
         'image': image,
         'url': url_receive,
@@ -269,6 +271,7 @@ def post_kakao():
     url_receive = request.form['give_url']
     star_receive = request.form['give_star']
     comment_receive = request.form['give_comment']
+    username_receive = request.form['give_username']
 
     # bs4 and requests
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -279,6 +282,7 @@ def post_kakao():
     image = soup.select_one('meta[property="og:image"]')['content']
 
     doc = {
+        "username": username_receive,
         "url": url_receive,
         "star": star_receive,
         "comment": comment_receive,
@@ -350,6 +354,7 @@ def comment_ktoon():
     url_receive = request.form['url_give']
     star_receive = request.form['star_give']
     comment_receive = request.form['comment_give']
+    username_receive = request.form['username_give']
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -361,6 +366,7 @@ def comment_ktoon():
     title = soup.select_one('meta[property="og:title"]')['content']
 
     doc = {
+        'username': username_receive,
         'url': url_receive,
         'image': image,
         'title': title,
